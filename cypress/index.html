@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Title</title>
+</head>
+
+<body>
+
+    <!-- for type function test -->
+    <div>textarea 標籤的例子</div>
+    <textarea></textarea>
+    <div>option標籤的例子</div>
+    <input list="fruit">
+    <datalist id="fruit">
+        <option>apple</option>
+        <option>banana</option>
+        <option>cantaloupe</option>
+    </datalist>
+
+    <div>各種時間類型 input的例子</div>
+    <input type="date">
+    <input type="month">
+    <input type="week">
+    <input type="time">
+
+    <!-- for all function test -->
+    <button id="main1" class="btn" data-cy="submit">submit</button>
+    <button id="main2" class="btn" data-test="submit">submit</button>
+    <button id="main3" class="btn" data-testid="submit">submit</button>
+    <input class="single_option" name="username" type="text">
+
+    <ul>
+        <li id="li1">test1</li>
+        <li data-cy="li2">test2</li>
+        <li data-test="li3">test3</li>
+        <li data-testid="li4">test4</li>
+    </ul>
+
+    <!-- for check function test -->
+    <form>
+        <input type="radio" name="city" id="gz" value="gz">
+        <label for="gz">廣州</label>
+        <input type="radio" name="city" id="sh" value="sz">
+        <label for="sh">上海</label>
+    </form>
+
+    <form>
+        <input type="checkbox" id="money" value="money">
+        <label for="money">有錢？</label>
+        <input type="checkbox" id="house" value="house">
+        <label for="house">有房？</label>
+    </form>
+
+    <!-- for select function test -->
+    <select multiple>
+        <option value="1">red</option>
+        <option value="2">yellow</option>
+        <option value="3">orange</option>
+    </select>
+
+    <select style="display: none;">
+        <option value="bg">北京</option>
+        <option value="sd">山東</option>
+    </select>
+</body>
+
+</html>
