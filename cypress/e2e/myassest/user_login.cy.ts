@@ -2,7 +2,7 @@ describe("user_login", () => {
     beforeEach(() => {
         cy.visit('https://app.myassets.com/')
     })
-    it("Login with correct email address and password", () => {
+    it.only("Login with correct email address and password", () => {
         cy.visit("https://app.myassets.com/")
         cy.get('#email').type('myademonumber8@gmail.com')
         cy.get('#password').type('Myatesting#')
@@ -58,8 +58,9 @@ describe("user_login", () => {
         })
     })
     it('Login page Forgot password Link', () => {
-        cy.get('.jss18 > .MuiButtonBase-root > .MuiButton-label').click()
-        cy.get('.jss57').should('exist').contains('Forgot password?') //conditions is get forgot password page h1 text 
+        cy.get('.jss18 > .MuiButtonBase-root > .MuiButton-label').click().wait(10000)
+        cy.get('.jss69').should('exist').contains('Forgot password?')
+        //conditions is get forgot password page h1 text 
     })
     it('Login page "create a new account button', () => {
         cy.get('.jss25 > .MuiButtonBase-root > .MuiButton-label > span').click()
