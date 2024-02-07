@@ -7,7 +7,7 @@ describe("Pressonal account settings", () => {
         cy.get('#password').type('Myatesting#')
         cy.get('[data-cy="login-btn"] > .MuiButton-label').click().wait(10000)//等待頁面完全加載完畢
         cy.get('.MuiAvatar-root').click('center')
-        cy.get(':nth-child(1) > .jss111').click()
+        cy.get(':nth-child(1) > .jss93').click()
     })
     context('Edit Profile', () => {
         it('Sorting of Account setting', () => {
@@ -62,11 +62,11 @@ describe("Pressonal account settings", () => {
             cy.get(':nth-child(2) > .MuiInputBase-root > .MuiSelect-root').click('center')
             cy.get('.MuiList-root > [tabindex="-1"]').should('exist').contains('JP')
         })
-        it.only('Base Language', () => {
-            cy.get('.jss1814 > .MuiBox-root > .MuiButtonBase-root').click('center')
+        it('Base Language', () => {
+            cy.get('.jss952 > .MuiBox-root > .MuiButtonBase-root').click('center')
             cy.get(':nth-child(2) > .MuiInputBase-root > .MuiSelect-root').click('center')
             cy.get('.MuiList-root > [tabindex="-1').click()
-            cy.get('.jss1921').click('center')
+            cy.get('.jss1064').click('center')
             cy.get(':nth-child(3) > :nth-child(1) > .MuiBox-root > .jss1398').should('exist').contains('JP')
         })
     })
