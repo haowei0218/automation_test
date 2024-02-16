@@ -1,0 +1,25 @@
+[
+    {
+        "id": 1,
+        "name": "leanne Graham",
+        "username": "Tom",
+        "email": "sincere@april.biz",
+        "address": {
+            "street": "Kulas light",
+            "suite": "apt. 556",
+            "city": "Gwenborough",
+            "zipcode": "99288-3547",
+            "geo": {
+                "lat": "-37.3159",
+                "lng": "81.1425"
+            }
+        },
+        "phone": "0980-0808-00",
+        "website": "hildegrad.org",
+        "company": {
+            "name": "Romaguera-Crona",
+            "catchPhrase": "Multi-layered client-server neural-net",
+            "bs": "harness real-time e-markets"
+        }
+    }
+]
