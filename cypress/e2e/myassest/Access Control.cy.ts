@@ -1,15 +1,16 @@
+import MyassetsLoginPage from "../pages/myassets_function"
+import { random } from "lodash"
+
 describe('personal account menu', () => {
     beforeEach(() => {
-        cy.visit('https://app.myassets.com/')
-        cy.get('#email').type('myademonumber8@gmail.com')
-        cy.get('#password').type('Myatesting#')
-        cy.get('[data-cy="login-btn"] > .MuiButton-label').click('center').wait(5000)
+        const Login = new MyassetsLoginPage()
+        Login.login('myademonumber8@gmail.com', 'Myatesting#')
         cy.get('.MuiAvatar-root').click('center')
         cy.get(':nth-child(3) > .jss93').click()//access control button
 
     })
     context('access control', () => {
-        it('access control button', () => {
+        it.only('access control button', () => {
             cy.get('.MuiButton-startIcon').click('center')// create contact button
             cy.get('.jss147').should('exist').contains('Delegates')
         })
@@ -18,7 +19,7 @@ describe('personal account menu', () => {
             cy.get('.MuiDialogContent-root').should('exist')
         })
         it('use Effective email', () => {
-            const EffectiveEmail = 'yuyu04@gmail.com'
+            const EffectiveEmail = String('test' + random(1000))
             cy.get('.MuiButton-startIcon').click('center')
             cy.get('#email').type(EffectiveEmail)
             cy.get('.MuiDialogContent-root').scrollTo('bottom')// 滑動頁面

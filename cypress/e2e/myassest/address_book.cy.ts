@@ -1,4 +1,5 @@
 import { countBy, random } from "lodash"
+import MyassetsLoginPage from "../pages/myassets_function"
 
 describe('address book', () => {
     beforeEach(() => {
@@ -30,31 +31,10 @@ describe('address book', () => {
                 cy.get('.MuiTableCell-root > .MuiToolbar-root').eq(0).find('select').select(SelectLast[i])
             }
         })
-        it('Fill out the contact information page', () => {
+        it.only('Fill out the contact information page', () => {
             cy.get('[data-cy="add-btn"]').click('center')
-            const firstName = "test" + random(20000)
-            const Num = random(100000)
-            const company = 'testCompany' + random(19999)
-            const email = firstName + Num + '@gamil.com'
-            const PhoneNum = random(10000000000)
-            const addressFirst = "testaddress" + random(100)
-            const addressSecond = "testaddress" + random(100)
-            cy.get('#firstName').type(String(firstName))
-            cy.get('#lastName').type(String(Num))
-            cy.get('#company').type(company)
-            cy.get('#position').type('USA')
-            cy.get('#email').type(email)
-            cy.get('#phoneNumber').type(String(PhoneNum))
-            cy.get('#addressSearch').type('NewYork')
-            cy.get('#addressLineFirst').type(String(addressFirst))
-            cy.get('#addressLineSecond').type(String(addressSecond))
-            cy.get('#townCity').type(String('NewYork'))
-            cy.get('#stateCountry').type('Taipei')
-            cy.get('#zipCodePostcode').type(String(Num))
-            cy.get('#country').type('Angola')
-            cy.get('[data-cy="asset-dialog-submit-btn"] > .MuiButton-label > span').click()
-            cy.get('.MuiPagination-ul > :nth-child(3) > .MuiButtonBase-root').click()
-            cy.get('.jss470 > .MuiPaper-root').should('exist').contains(String(email))
+            const createContact = new MyassetsLoginPage()
+            createContact.ContactInfoPage()
 
         })
         it('Update contact information', () => {
