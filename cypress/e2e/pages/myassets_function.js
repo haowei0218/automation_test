@@ -26,6 +26,7 @@ export default class MyassetsLoginPage {
         this.submitButton = '[data-cy="asset-dialog-submit-btn"] > .MuiButton-label > span'
         this.pageButton = '.MuiPagination-ul > :nth-child(3) > .MuiButtonBase-root'
         this.check = '.jss470 > .MuiPaper-root'
+        this.perpage = '.MuiTableCell-root > .MuiToolbar-root'
     }
     login(email, pwd) {
         cy.visit(this.url)
@@ -66,6 +67,14 @@ export default class MyassetsLoginPage {
         cy.get(this.submitButton).click()
         cy.get(this.pageButton).click()
         cy.get(this.check).should('exist').contains(String(email))
+    }
+
+    AssetsPerPage() {
+        const PerpageList = ['10', '25', '50', '100']
+        for (let i = 0; i < PerpageList.length; i++) {
+            cy.get(this.perpage).eq(0).find('select').select(PerpageList[i])
+        }
+
     }
 
 

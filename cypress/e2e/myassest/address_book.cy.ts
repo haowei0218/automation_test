@@ -137,11 +137,9 @@ describe('address book', () => {
             cy.get('.jss749 > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click()
             cy.get('#country-option-0').click()
         })
-        it('assets per page button', () => {
-            const PerPage = ['10', '25', '50', '100']
-            for (let i = 0; i < PerPage.length; i++) {
-                cy.get('.MuiTableCell-root > .MuiToolbar-root').eq(0).find('select').select(PerPage[i])
-            }
+        it.only('assets per page button', () => {
+            const assetsPerPage = new MyassetsLoginPage()
+            assetsPerPage.perpage
         })
     })
 })
