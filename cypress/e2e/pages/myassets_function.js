@@ -1,5 +1,5 @@
 import { random } from "lodash"
-export default class MyassetsLoginPage {
+export default class MyassetsFunction {
     constructor() {
         this.email = '#email'
         this.password = '#password'
@@ -69,12 +69,29 @@ export default class MyassetsLoginPage {
         cy.get(this.check).should('exist').contains(String(email))
     }
 
-    AssetsPerPage() {
+    AssetsPerPage(perpageElement) {
         const PerpageList = ['10', '25', '50', '100']
         for (let i = 0; i < PerpageList.length; i++) {
-            cy.get(this.perpage).eq(0).find('select').select(PerpageList[i])
+            cy.get(perpageElement).eq(0).find('select').select(PerpageList[i])
         }
 
+    }
+    CloseButton() {
+
+    }
+    DiscardButton() {
+
+    }
+    KeepEditing() {
+
+    }
+    RandomEmail(name) {
+        const effectiveEmail = String(name + random(1000) + "@gmail.com")
+        cy.get(this.email).type(effectiveEmail)
+    }
+    RandomPassword(number) {
+        const effectivePassword = String(random(number))
+        cy.get(this.password).type(effectivePassword)
     }
 
 

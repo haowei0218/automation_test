@@ -1,11 +1,9 @@
 import { random } from "lodash"
-
+import MyassetsFunction from "../pages/myassets_function"
 describe("Pressonal account settings", () => {
     beforeEach(() => {
-        cy.visit('https://app.myassets.com/')
-        cy.get('#email').type('myademonumber8@gmail.com')
-        cy.get('#password').type('Myatesting#')
-        cy.get('[data-cy="login-btn"] > .MuiButton-label').click().wait(10000)//等待頁面完全加載完畢
+        const Login = new MyassetsFunction()
+        Login.login('myademonumber8@gmail.com', 'Myatesting#')
         cy.get('.MuiAvatar-root').click('center')
         cy.get(':nth-child(1) > .jss93').click()
     })

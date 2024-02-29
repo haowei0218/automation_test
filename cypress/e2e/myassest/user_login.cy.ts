@@ -1,17 +1,18 @@
+import MyassetsFunction from "../pages/myassets_function"
+
 describe("user_login", () => {
     beforeEach(() => {
         cy.visit('https://app.myassets.com/')
     })
     it.only("Login with correct email address and password", () => {
-        cy.visit("https://app.myassets.com/")
-        cy.get('#email').type('myademonumber8@gmail.com')
-        cy.get('#password').type('Myatesting#')
-        cy.get('[data-cy="login-btn"] > .MuiButton-label').click()
+        const Login = new MyassetsFunction()
+        Login.login('myademonumber8@gmail.com', 'Myatesting#')
     })
 
     it('Login with missing email suffix and correct password', () => {
         cy.get('#email').type('yuyu')
-        cy.get('#password').type('Ha900218')
+        const emailaddress = new MyassetsFunction()
+        emailaddress.RandomEmail('test')
         cy.get('[data-cy="login-btn"] > .MuiButton-label').click()
         cy.get('.MuiFormHelperText-root').should('exist').contains('Username or password is incorrect. Please try again.')
     })
