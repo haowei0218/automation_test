@@ -68,6 +68,4 @@ describe("Pressonal account settings", () => {
             cy.get(':nth-child(3) > :nth-child(1) > .MuiBox-root > .jss1398').should('exist').contains('JP')
         })
     })
-
-
 })

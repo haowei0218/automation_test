@@ -3,12 +3,10 @@ import MyassetsLoginPage from "../pages/myassets_function"
 
 describe('address book', () => {
     beforeEach(() => {
-        cy.visit('https://app.myassets.com/')
+        const Login = new MyassetsLoginPage()
+        Login.login('myademonumber8@gmail.com', 'Myatesting#')
         cy.viewport(1980, 1080)
-        cy.get('#email').type('myademonumber8@gmail.com')
-        cy.get('#password').type('Myatesting#')
-        cy.get('[data-cy="login-btn"] > .MuiButton-label').click('center').wait(4000)
-        cy.get('.MuiAvatar-root').click('center')
+        cy.get('.MuiAvatar-root').click()
         cy.get(':nth-child(5) > .jss93').click()
         cy.get('.MuiTableCell-root > .MuiToolbar-root').eq(0).find('select').select('100')
 
@@ -140,6 +138,11 @@ describe('address book', () => {
         it.only('assets per page button', () => {
             const assetsPerPage = new MyassetsLoginPage()
             assetsPerPage.perpage
+        })
+        it.only('delete button', () => {
+            cy.get(':nth-child(1) > .jss488 > .MuiGrid-container > :nth-child(2) > .MuiButtonBase-root > .MuiIconButton-label > .MuiBox-root').click()
+            cy.get('[data-cy="asset-dialog-submit-btn"]').click()
+            cy.get('contentContainer').should('exist')
         })
     })
 })
