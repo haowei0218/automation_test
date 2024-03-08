@@ -22,7 +22,7 @@ describe('MyFinances page', () => {
         cy.get('.jss794 > :nth-child(2) > .MuiTypography-root').should('exist').contains('Select the type of financial account')
 
     })
-    it.only('create asset - cash', () => {
+    it('create asset - cash', () => {
         cy.get('[href="/finances/accounts"]').click({ force: true })
         cy.get('[data-cy="add-btn"]').click({ force: true })
         cy.get('.jss793 > .MuiFormControl-root > .MuiInputBase-root > .MuiSelect-root').click('right')
@@ -32,8 +32,10 @@ describe('MyFinances page', () => {
         cy.get('.jss1552 > .MuiButton-label > span').click() //next button
 
     })
-    it('3 months', () => {
-
+    it.only('statistic chart search range', () => {
+        cy.get('[href="/finances/accounts').click({ force: true })
+        cy.get('#mui-component-select-selectedChartView').eq(0).select('1 month').should('exist')
     })
+
 
 })
