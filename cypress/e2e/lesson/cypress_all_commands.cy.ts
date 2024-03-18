@@ -1,3 +1,5 @@
+import { Subject } from "react-hook-form/dist/utils/createSubject"
+
 describe('cypress all commands', () => {
     context('and() commands', () => {
 
@@ -607,8 +609,23 @@ describe('cypress all commands', () => {
                 cy.wrap($form).should('have.class', 'open')
             })
         })
+
+        context('getCookie() commands', () => {
+            it.only('cy.getCookie() - get a browser cookie', () => {
+                cy.visit('https://example.cypress.io/commands/cookies');
+                cy.get('#getCookie .set-a-cookie').click();
+                cy.getCookie('token').should('exist').should('have.property', 'value', '123ABC').then(function (cookie: Subject) {
+                    cy.log(cookie);
+                })
+
+                //用.should(exist)判斷cookie對象是否存在
+                //用.should('have.property)判斷這個cookie對象的某個屬性是否包含指定的值
+                //用.then()暫存cookie對象 以便後續擴展使用
+            })
+
+
+
+        })
+
     })
-
-
-
 })
