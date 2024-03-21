@@ -24,12 +24,16 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['json',{outputFile:'results.json'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  expect:{
+    toHaveScreenshot:{maxDiffPixels:100}
+  },
   use: {
     baseURL: 'https://api.github.com',
     extraHTTPHeaders: {
       'Accept': 'application/vnd.github.v3+json',
       'Authorization': `token${process.env.API_TOKEN}`,
     },
+
     //apirequestcontext可以透過網路傳送各種http(s)請求
 
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -38,10 +42,11 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     proxy: {
-      server: 'http://my-proxy:8080',
+      server: 'http://myproxy.com:3128',
       username: 'user',
-      password: 'secret'
-    }
+      password: 'pwd'
+    },
+    video:'on-first-retry'//錄製視頻
   },
 
   /* Configure projects for major browsers */
@@ -77,7 +82,8 @@ export default defineConfig({
       use:{
         permissions:['notifications']
       }
-    }
+    },
+  
     
     //devices可用於模擬特定設備的瀏覽器行為 例如：屏幕尺寸 
 

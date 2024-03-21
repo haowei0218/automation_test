@@ -2,7 +2,8 @@ import { test, expect } from '@playwright/test';
 
 
 test.beforeEach(async({context})=>{
-  await context.grantPermissions((['notifications']),{origin:'https://skype.com'})
+  await context.grantPermissions((['notifications']),{origin:'https://skype.com'});
+  await context.route(/.css$/,route => route.abort()); //還可以對請求的資源做處理 比如可以阻止頁面上所有css文件的下載
 })
 
 test('has title', async ({ page }) => { 
@@ -130,6 +131,71 @@ test('處理新的彈出頁面',async({page})=>{
     await popup.waitForLoadState();
     console.log(await popup.title());
   })
+})
+
+test('frame 處理',async({page})=>{
+  await page.goto('http://127.0.0.1:5500/automation_test/playwright/index.html');
+  const frame = page.frame('frame-login');//通過frame的name屬性定位到frame對象
+  const frame1 = page.frame({url:/.*domain.*/});//通過iframe引入的url地址定位frame對象
+  await frame?.getByRole('button',{name:/submit/i}).click();//操作frame對象中的元素
+  const username = await page.frameLocator('.frame-class').getByLabel('User Name');
+  await username.fill('john');
+})
+
+test('javasctipt 腳本',async({page})=>{
+  const href = await page.evaluate(() => document.location.href);
+  await page.evaluate(num => num, 42); //傳數字參數
+  await page.evaluate(array => array.length, [1,3,4]);//傳數字數組
+  await page.evaluate(object => object.foo, {foo:'bar'});//傳對象
+    
+})
+
+test('http請求的攔截',async({page})=>{
+  await page.route('https://dog.ceo/api/breeds/list/all',async route => {
+    const json = {
+      message:{'test_breed':[]}
+    };
+    await route.fulfill({json});
+  })
+})
+
+test('http 請求的攔截 2',async({page})=>{
+  await page.route('https://dog.ceo/api/breeds/list/all', async route =>{
+    const response = await route.fetch();//先去對該http做請求
+    const json = await response.json();//將響應的body部分取出來
+    json.message['big_red_dog'] = [];//修改響應的'big_red_dog的值
+    await route.fulfill({response,json})//返回
+  })
+})
+
+test('loads page without css',async ({page})=>{
+  await page.goto('https://playwright.dev');
+})
+
+test('對網路請求進行監控 定義了對請求和響應的監控',async({page})=>{
+  page.on('request',request => console.log('>>',request.method(),request.url()));
+  page.on('response',response => console.log('<<',response.status(),response.url()));
+  await page.goto('https://example.com');
+})
+
+test('定義一個請求事件',async({page})=>{
+  const responsePromise = page.waitForResponse('**/api/fetch_data');
+  await page.getByText('Update').click();
+  const response = await responsePromise;
+})
+
+test('截圖',async({page})=>{
+  await page.goto('http://127.0.0.1:5500/automation_test/playwright/index.html')
+  await page.screenshot({path:'screenshot.png'});//將當前頁面截屏保存到文件
+  await page.screenshot({path:'screenshot.png',fullPage:true});//若當前頁面存在滾動條 可以使用fullpage來完整截圖
+  const buffer = await page.screenshot();
+  console.log(buffer.toString('base64'));//可以將截圖以base64的編碼方式保存到buffer中
+  await page.locator('.header').screenshot({path:'screenshot.png'})//對單個元素進行對比
+})
+
+test('視覺對比',async({page})=>{
+  await page.goto('http://127.0.0.1:5500/automation_test/playwright/index.html');
+  await expect(page).toHaveScreenshot('screenshot.png');
 })
 
 //async(參數)＝> {函數身體部分}
