@@ -11,6 +11,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -21,7 +22,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [['json',{outputFile:'results.json'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL: 'https://api.github.com',
@@ -59,6 +60,26 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
+    {
+      name:'Desktop Safari',
+      use:{
+        browserName:'webkit',
+        viewport:{width:1200,height:7500}
+      }
+    },
+    {
+      name:"Mobile Safari",
+      use:{
+        ...devices['iPhone 13']
+      }
+    },
+    {
+      use:{
+        permissions:['notifications']
+      }
+    }
+    
+    //devices可用於模擬特定設備的瀏覽器行為 例如：屏幕尺寸 
 
 
     /* Test against mobile viewports. */

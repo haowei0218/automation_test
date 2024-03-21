@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>test website</title>
+</head>
+<body>
+
+         <h3>Sign up</h3>
+         <label for="">
+                  <input type="checkbox"/>Subscribe
+         </label>
+         <button >Submit</button>
+
+         <span>Welcome, john</span>
+         <img alt="playwright logo" src="/img/playwright-logo.svg" width="100">
+         <span title="Issues count">25 issues</span>
+
+         <ul>
+                  <li>
+                           <h3>Product1</h3>
+                           <button>Add to card 1</button>
+                  </li>
+
+                  <li>
+                           <h3>Product2</h3>
+                           <button>Add to card 2</button>
+                  </li>
+         </ul>
+         <label for="">
+                  <input type="checkbox">i agree to the terms above
+                  <input type="radio">i agree to the terms above
+                  <textarea placeholder="testarea" name="example textarea">example textarea</textarea>
+         </label>
+
+         <label for="">
+                  Password <input type="password">
+         </label>
+         <button id="test">button 1</button>
+         <button>button 2</button>
+         <button>button 3</button>
+
+         <script>
+                  const newPagePromise = page.waitForEvent('popup');
+                  await page.getByText('點我').click();
+                  const newPage = await newPagePromise;
+
+                  await newPage.waitForLoadState();
+                  console.log(await ponewPageup.title());
+         </script>
+
+         <label for="Upload">
+                  <input type="file">Upload file
+         </label>
+
+         
+         
+</body>
+</html>
