@@ -8,26 +8,26 @@ describe("personal account menu", () => {
   beforeEach(() => {
     personal_account.login("myademonumber8@gmail.com", "Myatesting#");
     personal_account.PersonalAccountButton().click({ timeout: 50000 });
-    cy.get(":nth-child(3) > .jss93").click(); //access control button
+    Permissions.AccessControlButton().click().wait(4000); //access control button
   });
   context("access control", () => {
     it.only("access control button", () => {
-      cy.get(".MuiButton-startIcon").click("center"); // create contact button
-      cy.get(".jss147").should("exist").contains("Delegates");
+      Permissions.verifyCorrectPage(".jss147", "Delegates");
+      // cy.get(".jss147").should("exist").contains("Delegates");
     });
     it("create contact button", () => {
-      cy.get(".MuiButton-startIcon").click("center");
-      cy.get(".MuiDialogContent-root").should("exist");
+      Permissions.CreateDelegateButton().click("center"); // create contact button
+      Permissions.PopUpAccessControlPage().should("exist"); //access control彈窗顯示的頁面
     });
     it("use Effective email", () => {
-      const EffectiveEmail = String("test" + random(1000));
-      cy.get(".MuiButton-startIcon").click("center");
-      cy.get("#email").type(EffectiveEmail);
-      cy.get(".MuiDialogContent-root").scrollTo("bottom"); // 滑動頁面
-      cy.get('[data-cy="asset-dialog-submit-btn"]').click("center").wait(6000); // create button and wait 5s delegate was created display
-      cy.get(".MuiSnackbar-root > .MuiPaper-root")
-        .should("exist")
-        .contains("Delegate was created");
+      let effectiveEamil = personal_account.RandomEmail("test");
+      personal_account
+        .PersonalAccountButton()
+        .click("center", { timeout: 40000 });
+      personal_account.GetEamil().type(String(effectiveEamil));
+      Permissions.PopUpAccessControlPage().scrollTo("bottom"); // 滑動頁面
+      Permissions.UploadAccessControlButton().click("center").wait(6000); // create button and wait 5s delegate was created display
+      Permissions.CheckSuccessMessage();
     });
     it.only("New Role button", () => {
       Permissions.CreateDelegateButton().click("center");
@@ -36,11 +36,13 @@ describe("personal account menu", () => {
   });
 
   context("Permissions corresponding to the role", () => {
-    it("MyFinance view", () => {
-      cy.get(".MuiButton-startIcon").click("center");
-      cy.get(".MuiDialogContent-root").scrollTo("bottom");
-      cy.get(".MuiSelect-root").should("exist").contains("MyFinance view");
-      cy.get(".jss596").should("exist").contains("my_finance.view");
+    it.only("MyFinance view", () => {
+      Permissions.CreateDelegateButton().click("center");
+      Permissions.PopUpAccessControlPage().scrollTo("bottom");
+      Permissions.Permissions_options();
+      // cy.get(".MuiDialogContent-root").scrollTo("bottom");
+      // cy.get(".MuiSelect-root").should("exist").contains("MyFinance view");
+      // cy.get(".jss596").should("exist").contains("my_finance.view");
     });
     it("MyFinance edit", () => {
       cy.get(".MuiButton-startIcon").click("center");

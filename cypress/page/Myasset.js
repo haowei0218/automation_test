@@ -30,8 +30,14 @@ export default class MyassetsMainPage {
     this.check = ".jss470 > .MuiPaper-root";
     this.perpage = ".MuiTableCell-root > .MuiToolbar-root";
   }
+  GetEamil() {
+    return cy.get(this.email);
+  }
+  GetPassword() {
+    return cy.get(this.password);
+  }
   login(email, pwd) {
-    cy.visit("https://app.myassets.com/");
+    cy.visit(this.url);
     cy.get(this.email).type(email);
     cy.get(this.password).type(pwd);
     cy.get(this.signin).click("center", { timeout: 50000 }).wait(5000);
@@ -48,6 +54,9 @@ export default class MyassetsMainPage {
     cy.get(this.SignUpPassword).type(Password);
     cy.get(this.CreateButton).click();
   }
+  AccessControlButton() {
+    return cy.get(":nth-child(3) . .jss93");
+  }
   ContactInfoPage() {
     const firstName = String("test" + random(20000));
     const Num = random(100000);
@@ -62,6 +71,7 @@ export default class MyassetsMainPage {
     cy.get(this.position).type("USA");
     cy.get(this.addressBookEmail).type(email);
     cy.get(this.phone).type(String(PhoneNum));
+    cy.get(this.email).type(this.RandomEmail("test"));
     cy.get(this.addresslinefirst).type(addressFirst);
     cy.get(this.addresslinesecond).type(addressSecond);
     cy.get(this.townCity).type("NewYork");
@@ -89,8 +99,8 @@ export default class MyassetsMainPage {
   CloseButton() {}
   DiscardButton() {}
   KeepEditing() {}
-  RandomEmail(name) {
-    const effectiveEmail = String(name + random(1000) + "@gmail.com");
+  RandomEmail(Name) {
+    const effectiveEmail = String(Name + random(1000) + "@gmail.com");
     cy.get(this.email).type(effectiveEmail);
   }
   RandomPassword(number) {
