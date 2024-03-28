@@ -39,7 +39,7 @@ describe("personal account menu", () => {
     it.only("MyFinance view", () => {
       Permissions.CreateDelegateButton().click("center");
       Permissions.PopUpAccessControlPage().scrollTo("bottom");
-      Permissions.Permissions_options();
+      Permissions.ImplementPermissionsOptions("MyFinance view");
       // cy.get(".MuiDialogContent-root").scrollTo("bottom");
       // cy.get(".MuiSelect-root").should("exist").contains("MyFinance view");
       // cy.get(".jss596").should("exist").contains("my_finance.view");
